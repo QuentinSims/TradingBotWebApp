@@ -1,2 +1,19 @@
-body {
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    grid-gap: 10px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    cursor: pointer;
+    margin: 0; 
+}
+
+.heading-padding {
+    padding-bottom: 10px;
 }
