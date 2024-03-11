@@ -1,0 +1,41 @@
+﻿#root {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column; /* Ensure children stack vertically */
+    justify-content: center; /* Align children vertically in the center */
+    align-items: center; /* Align children horizontally in the center */
+    padding: 0;
+    margin: 0;
+}
+
+
+tr:nth-child(even) {
+    background: #F2F2F2;
+}
+
+tr:nth-child(odd) {
+    background: #FFF;
+}
+
+th, td {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+.container-fluid {
+    width: 100%;
+    height: 100%;
+}
+
+.row {
+    width: 100%;
+    height: 50%;
+}
+
+.col-xl-6,
+.col-lg-6,
+.col-md-6,
+.col-sm-12 {
+    width: 100%;
+    height: 100%;
+}
