@@ -28,18 +28,16 @@ function LoggingComponent() {
     }
 
 
-  return (
-      <div className="container">
-          <div className="row">
-              <div className="col">
-                  <h2 className="text-left">Logging</h2>
-                  {logMessages?.map((log, index) => (
-                      <p key={index}>{log.date}: {log.message}</p>
-                  ))}
-              </div>
-          </div>
-      </div>
-  );
+    return (
+        <div className="card">
+            <div className="card-body">
+                <h2 className="card-title text-left">Logging</h2>
+                {logMessages?.map((log, index) => (
+                    <p key={index}>{log.date}: {log.message}</p>
+                ))}
+            </div>
+        </div>
+    );
 }
 
 export default LoggingComponent;

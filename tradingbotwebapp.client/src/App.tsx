@@ -6,6 +6,7 @@ import StrategyComponent from './components/strategy/StrategyComponent';
 import TradesComponent from './components/trades/TradesComponent';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import AlertComponent from './components/alert/AlertComponent';
 
 
 
@@ -24,9 +25,19 @@ function App() {
                     <WatchListComponent />
                 </div>
                 <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                    <LoggingComponent />
+                    <div className="row">
+                        <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <LoggingComponent />
+                        </div>
+                    </div>
+                    <div className="row row-padding">
+                        <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                            <AlertComponent/>
+                        </div>
+                    </div>
                 </div>
             </div>
+
             <div className="row">
                 <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                     <StrategyComponent />
