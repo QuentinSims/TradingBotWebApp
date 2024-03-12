@@ -31,7 +31,7 @@ function LoggingComponent() {
     return (
         <div className="card">
             <div className="card-body">
-                <h2 className="card-title text-left">Logging</h2>
+               {/* <h2 className="card-title text-left">Logging</h2>*/}
                 {logMessages?.map((log, index) => (
                     <p key={index}>{log.date}: {log.message}</p>
                 ))}
