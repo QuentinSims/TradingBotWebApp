@@ -77,8 +77,6 @@ function StrategyComponent() {
                 </div>
             </div>
         </div>
-
-      
     );
 }
 

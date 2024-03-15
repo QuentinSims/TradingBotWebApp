@@ -29,16 +29,22 @@ function TradesComponent() {
     }
 
 
-  return (
-      <div className="card">
-          <div className="card-body">
-              <h2 className="card-title text-left">Trades</h2>
-              {tradesMessages?.map((log, index) => (
-                  <p key={index}>{log.date}: {log.message}</p>
-              ))}
-          </div>
-      </div>
-  );
+    return (
+        <div>
+            <h2 className="text-left">Trades</h2>
+            {tradesMessages?.map((log, index) => (
+                <p key={index}>{log.date}: {log.message}</p>
+            ))}
+        </div>
+        //<div className="card">
+        //    <div className="card-body">
+        //        <h2 className="card-title text-left">Trades</h2>
+        //        {tradesMessages?.map((log, index) => (
+        //            <p key={index}>{log.date}: {log.message}</p>
+        //        ))}
+        //    </div>
+        //</div>
+    );
 }
 
 export default TradesComponent;

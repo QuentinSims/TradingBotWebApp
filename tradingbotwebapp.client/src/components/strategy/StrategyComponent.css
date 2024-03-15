@@ -1,2 +1,23 @@
-body {
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 columns for each table column */
+    grid-auto-rows: auto;
+    gap: 5px; /* Adjust the gap between grid items */
+}
+
+.grid-item {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr); /* 1 column for each cell */
+    border: 1px solid #ccc; /* Add border for each grid item */
+}
+
+.grid-cell {
+    padding: 5px;
+    text-align: center;
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
 }

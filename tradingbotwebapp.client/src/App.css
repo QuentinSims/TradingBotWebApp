@@ -43,3 +43,24 @@ th, td {
 .row-padding {
     padding-top: 45px; 
 }
+
+.left-drawer {
+    height: 100%;
+    width: 100%;
+    background-color: #1E3A8A;
+    color: #F0F0F0;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.watchlist-container,
+.logging-container,
+.alert-container {
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Cards on the Right */
+.main-screen {
+    background-color: #F0F0F0; /* Light Gray */
+    color: #1E3A8A; /* Dark Blue */
+}

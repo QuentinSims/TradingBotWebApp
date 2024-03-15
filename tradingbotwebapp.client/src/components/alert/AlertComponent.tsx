@@ -26,30 +26,50 @@ function AlertComponent() {
         setAlertMessages(data);
     }
 
-  return (
-      <div className="card">
-          <div className="card-body">
-              <h5 className="card-title">Alerts</h5>
-              <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
-                  <div className="carousel-inner">
-                      {alertMessages?.map((alert, index) => (
-                          <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={index}>
-                              <h6 className="card-subtitle mb-2 text-body-secondary">{alert.subtitle}</h6>
-                              <p className="card-text">{alert.message}</p>
-                          </div>
-                      ))}
-                  </div>
-                  <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-                      <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-                      <span className="visually-hidden">Previous</span>
-                  </button>
-                  <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-                      <span className="carousel-control-next-icon" aria-hidden="true"></span>
-                      <span className="visually-hidden">Next</span>
-                  </button>
-              </div>
-          </div>
-      </div>
+    return (
+        <div>
+            <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
+                <div className="carousel-inner">
+                    {alertMessages?.map((alert, index) => (
+                        <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={index}>
+                            <h6 className="card-subtitle mb-2 text-body-secondary">{alert.subtitle}</h6>
+                            <p className="card-text">{alert.message}</p>
+                        </div>
+                    ))}
+                </div>
+                <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Previous</span>
+                </button>
+                <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span className="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span className="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+      //<div className="card">
+      //    <div className="card-body">
+      //        <h5 className="card-title">Alerts</h5>
+      //        <div id="carouselExampleIndicators" className="carousel slide" data-bs-ride="carousel">
+      //            <div className="carousel-inner">
+      //                {alertMessages?.map((alert, index) => (
+      //                    <div className={`carousel-item ${index === 0 ? 'active' : ''}`} key={index}>
+      //                        <h6 className="card-subtitle mb-2 text-body-secondary">{alert.subtitle}</h6>
+      //                        <p className="card-text">{alert.message}</p>
+      //                    </div>
+      //                ))}
+      //            </div>
+      //            <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+      //                <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+      //                <span className="visually-hidden">Previous</span>
+      //            </button>
+      //            <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+      //                <span className="carousel-control-next-icon" aria-hidden="true"></span>
+      //                <span className="visually-hidden">Next</span>
+      //            </button>
+      //        </div>
+      //    </div>
+      //</div>
   );
 }
 

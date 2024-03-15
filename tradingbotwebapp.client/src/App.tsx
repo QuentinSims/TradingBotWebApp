@@ -22,32 +22,35 @@ function App() {
     return (
         <div className="container-fluid">
             <div className="row">
-                <div className="col-xl-2 col-lg-2 col-md-2 col-sm-6">
-                    <WatchListComponent />
-                </div>
-                <div className="col-xl-4 col-lg-4 col-md-4 col-sm-6">
-                    <GraphComponent/>
-                </div>
-                <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                    <div className="row">
-                        <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <div className="col-xl-2 col-lg-2 col-md-2 col-sm-2">
+                    <div className="left-drawer">
+                        <div className="watchlist-container">
+                            <WatchListComponent />
+                        </div>
+                        <div className="logging-container">
                             <LoggingComponent />
                         </div>
-                    </div>
-                    <div className="row row-padding">
-                        <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                            <AlertComponent/>
+                        <div className="alert-container">
+                            <AlertComponent />
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <div className="row">
-                <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                    <StrategyComponent />
-                </div>
-                <div className="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                    <TradesComponent />
+                <div className="col-xl-10 col-lg-10 col-md-10 col-sm-10 .main-screen">
+                    <div className="main-screen d-flex flex-column h-100">
+                        <div className="row flex-grow-1">
+                            <div className="col-xl-12 col-lg-12 col-md-12 col-sm-12 h-100">
+                                <GraphComponent />
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 h-100">
+                                <StrategyComponent />
+                            </div>
+                            <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 h-100">
+                                <TradesComponent/>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
