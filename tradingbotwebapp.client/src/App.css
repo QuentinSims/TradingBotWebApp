@@ -1,6 +1,6 @@
 ﻿#root {
     width: 100%;
-    height: 100vh;
+    height: 200vh;
     display: flex;
     flex-direction: column; /* Ensure children stack vertically */
     justify-content: center; /* Align children vertically in the center */
@@ -45,9 +45,11 @@ th, td {
 }
 
 .left-drawer {
-    height: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 100%; /* Ensure the column takes the full height */
     width: 100%;
-    background-color: #1E3A8A;
+    background-color: #020D68;
     color: #F0F0F0;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
 }
@@ -55,8 +57,28 @@ th, td {
 .watchlist-container,
 .logging-container,
 .alert-container {
-    padding: 20px;
-    margin-bottom: 20px;
+    padding: 5px;
+    margin-bottom: 5px;
+    width: 100%;
+    overflow: hidden; /* Hide overflow for the components */
+}
+
+.watchlist-container {
+    flex: 1; /* Take 33% of the height */
+    max-height: 33%; /* Ensure it doesn't take more than 33% */
+    overflow-y: auto; /* Enable vertical scrolling if necessary */
+}
+
+.logging-container {
+    flex: 1; /* Take 50% of the height */
+    max-height: 50%; /* Ensure it doesn't take more than 50% */
+    display: flex;
+    align-items: center; /* Center the LoggingComponent vertically */
+}
+
+.alert-container {
+    flex: 1; /* Take 25% of the height */
+    max-height: 25%; /* Ensure it doesn't take more than 25% */
 }
 
 /* Cards on the Right */

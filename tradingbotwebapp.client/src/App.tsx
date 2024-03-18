@@ -22,17 +22,15 @@ function App() {
     return (
         <div className="container-fluid">
             <div className="row">
-                <div className="col-xl-2 col-lg-2 col-md-2 col-sm-2">
-                    <div className="left-drawer">
-                        <div className="watchlist-container">
-                            <WatchListComponent />
-                        </div>
-                        <div className="logging-container">
-                            <LoggingComponent />
-                        </div>
-                        <div className="alert-container">
-                            <AlertComponent />
-                        </div>
+                <div className="col-xl-2 col-lg-2 col-md-2 col-sm-2 left-drawer">
+                    <div className="watchlist-container">
+                        <WatchListComponent />
+                    </div>
+                    <div className="logging-container">
+                        <LoggingComponent />
+                    </div>
+                    <div className="alert-container">
+                        <AlertComponent />
                     </div>
                 </div>
                 <div className="col-xl-10 col-lg-10 col-md-10 col-sm-10 .main-screen">
@@ -47,7 +45,7 @@ function App() {
                                 <StrategyComponent />
                             </div>
                             <div className="col-xl-6 col-lg-6 col-md-6 col-sm-6 h-100">
-                                <TradesComponent/>
+                                <TradesComponent />
                             </div>
                         </div>
                     </div>
