@@ -42,11 +42,11 @@ function WatchListComponent() {
         if (symbol.length >= 3) {
             const value = await fetchSymbolValue(symbol);
             addWatchlist(symbol, value);
-            // Clear search state
             setSearchText('');
         }
+        // Clear search state regardless of the length
+        setSearchText(symbol);
     };
-
     // Function to fetch symbol value from API
     const fetchSymbolValue = async (symbol: string) => {
         try {
