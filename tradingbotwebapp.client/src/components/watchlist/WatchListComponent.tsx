@@ -20,29 +20,21 @@ function WatchListComponent() {
             value: value
         };
         setWatchList([...watchlist, newWatchlist]);
+        setSearchText('');
     };
 
-    //// Function to fetch suggestions based on search text
-    //const fetchSuggestions = async (searchText: string) => {
-    //    // You would implement your own logic here to fetch suggestions from an API
-    //    const dummySuggestions = ['BTC', 'ETH', 'LTC'];
-
-    //    // Filter suggestions based on search text
-    //    const filteredSuggestions = dummySuggestions.filter(symbol =>
-    //        symbol.toLowerCase().includes(searchText.toLowerCase())
-    //    );
-
-    //    // Set filtered suggestions
-    //    setSuggestions(filteredSuggestions);
-    //    handleSuggestionSelect(filteredSuggestions[0])
-    //};
+    //ability to remove an item
+    const removeItem = (indexToRemove: number) => {
+        setWatchList(watchlist.filter((_, index) => index !== indexToRemove));
+    };
 
     // Function to handle selection of a suggestion
     const handleSuggestionSelect = async (symbol: string) => {
         if (symbol.length >= 3) {
-            const value = await fetchSymbolValue(symbol);
-            addWatchlist(symbol, value);
-            setSearchText('');
+            const data = await fetchSymbolValue(symbol);
+            if (data != null) {
+                addWatchlist(symbol, data?.BTC);
+            }
         }
         // Clear search state regardless of the length
         setSearchText(symbol);
@@ -54,9 +46,9 @@ function WatchListComponent() {
             if (!response.ok) {
                 throw new Error('Failed to fetch symbol value');
             }
-            const data = await response.json();
+            const data = { "BTC": 72000 }//await response.json();
             // Assuming the value is returned in the 'value' field of the response data
-            return data.value;
+            return data;
         } catch (error) {
             console.error('Error fetching symbol value:', error);
             // You can handle errors here, such as displaying an error message or returning a default value
@@ -81,26 +73,19 @@ function WatchListComponent() {
                     <span>
                         Watchlist empty.
                     </span>
-                    {/*<button className="btn btn-link" onClick={() => setShowSearch(true)}*/}
-                    {/*    data-bs-toggle="tooltip"*/}
-                    {/*    data-bs-placement="top"*/}
-                    {/*    data-bs-custom-class="custom-tooltip"*/}
-                    {/*    data-bs-title="This top tooltip is themed via CSS variables.">*/}
-                    {/*    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus-circle" viewBox="0 0 16 16">*/}
-                    {/*        <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />*/}
-                    {/*        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />*/}
-                    {/*    </svg>*/}
-                    {/*</button>*/}
                 </div>
             ) : (
-                <div>
-                    {watchlist.map((item, index) => (
-                        <p key={index}>{item.symbol}: {item.value}</p>
-                    ))}
-                    {/*<div>*/}
-                    {/*    <button type="button" className="btn btn-primary" onClick={() => setShowSearch(true)}>Add More</button>*/}
-                    {/*</div>*/}
-                </div>
+                    <div>
+                        {watchlist.map((item, index) => (
+                            <div className="item-container" key={index}>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-dash-square remove-icon" viewBox="0 0 20 20" onClick={() => removeItem(index)}>
+                                    <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2z" />
+                                    <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8" />
+                                </svg>
+                                <span className="symbol-value">{item.symbol.toUpperCase()}: {item.value}</span>
+                            </div>
+                        ))}
+                    </div>
             )}
         </div>
     );
