@@ -1,11 +1,10 @@
 import { useState } from 'react';
+import { REACT_APP_API_KEY, REACT_APP_API_URL } from '../../../config.js';
 
 interface WatchList {
     symbol: string;
     value: number
 }
-
-
 
 function WatchListComponent() {
     const coins: string[] = [
@@ -39,7 +38,6 @@ function WatchListComponent() {
     //const [showSearch, setShowSearch] = useState(false);
     const [searchText, setSearchText] = useState('');
     const [suggestions, setSuggestions] = useState<string[]>([]);
-    const [selectedSuggestion, setSelectedSuggestion] = useState("")
 
 
     const addWatchlist = (symbol: string, value: number) => {
@@ -85,19 +83,24 @@ function WatchListComponent() {
     // Function to fetch symbol value from API
     const fetchSymbolValue = async (symbol: string | undefined) => {
         try {
-            const response = await fetch(`YOUR_API_ENDPOINT/${symbol}`);
+            const response = await fetch(`${REACT_APP_API_URL}/get-binance-contract-by-symbol?symbol=${symbol}`, {
+                headers: {
+                    'X-Api-Key': REACT_APP_API_KEY
+                }
+            });
+
             if (!response.ok) {
                 throw new Error('Failed to fetch symbol value');
             }
-            const data = { "BTC": 72000 }//await response.json();
-            // Assuming the value is returned in the 'value' field of the response data
+
+            const data = await response.json();
             return data;
         } catch (error) {
             console.error('Error fetching symbol value:', error);
-            // You can handle errors here, such as displaying an error message or returning a default value
             return null;
         }
     };
+
 
     return (
         <div>
