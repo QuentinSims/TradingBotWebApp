@@ -20,6 +20,38 @@ namespace TradingBotWebApp.Server.Controllers
             _publicService = publicService;
         }
 
+
+        [HttpGet]
+        [Route("get-all-binance-symbols")]
+        [SecurityAPIKey]
+        [ProducesResponseType(typeof(List<string>), 200)]
+        [ProducesResponseType(400)]
+        public async Task<ActionResult<List<string>>> GetAllBinanceSymbols()
+        {
+            try
+            {
+                var result = await _publicService.GetAllBinanceSymbols();
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                List<string> errors = new List<string>();
+                string message = ex.Message;
+                errors = message.Split(',').ToList();
+
+                var problemDetails = new ProblemDetails
+                {
+                    Title = "An error occurred",
+                    Detail = errors[1],
+                    Status = Convert.ToInt32(errors[0]),
+                    Instance = HttpContext.Request.Path,
+                    Extensions = { { "Stack Trace", ex.InnerException } }
+                };
+
+                return StatusCode(problemDetails.Status.Value, problemDetails);
+            }
+        }
+
         [HttpGet]
         [Route("get-binance-contract-by-symbol")]
         [SecurityAPIKey]
@@ -30,6 +62,37 @@ namespace TradingBotWebApp.Server.Controllers
             try
             {
                 var result = await _publicService.GetBinanceContractBySymbol(symbol);
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                List<string> errors = new List<string>();
+                string message = ex.Message;
+                errors = message.Split(',').ToList();
+
+                var problemDetails = new ProblemDetails
+                {
+                    Title = "An error occurred",
+                    Detail = errors[1],
+                    Status = Convert.ToInt32(errors[0]),
+                    Instance = HttpContext.Request.Path,
+                    Extensions = { { "Stack Trace", ex.InnerException } }
+                };
+
+                return StatusCode(problemDetails.Status.Value, problemDetails);
+            }
+        }
+
+        [HttpGet]
+        [Route("get-latest-price-by-symbol")]
+        [SecurityAPIKey]
+        [ProducesResponseType(typeof(List<WatchlistModel>), 200)]
+        [ProducesResponseType(400)]
+        public async Task<ActionResult<List<WatchlistModel>>> GetLatestPriceBySymbol(string? symbol = null)
+        {
+            try
+            {
+                var result = await _publicService.GetLatestPriceBySymbol(symbol);
                 return Ok(result);
             }
             catch (Exception ex)
