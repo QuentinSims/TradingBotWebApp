@@ -4,3 +4,9 @@ GET {{TradingBotWebApp.Server_HostAddress}}/api/public/get-binance-contract-by-s
 Accept: application/json
 
 ###
+GET {{TradingBotWebApp.Server_HostAddress}}/api/public/get-all-binance-symbols
+Accept: application/json
+
+###
+GET {{TradingBotWebApp.Server_HostAddress}}/api/public/get-latest-price-by-symbol?symbol=BTCUSDT
+Accept: application/json

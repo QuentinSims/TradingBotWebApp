@@ -11,5 +11,6 @@
   <ItemGroup>
     <Folder Include="src\components\alert\" />
     <Folder Include="src\components\graph\" />
+    <Folder Include="src\services\" />
   </ItemGroup>
 </Project>

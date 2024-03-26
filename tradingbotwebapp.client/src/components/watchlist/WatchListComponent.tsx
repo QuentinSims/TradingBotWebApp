@@ -1,9 +1,15 @@
 import { useState } from 'react';
-import { REACT_APP_API_KEY, REACT_APP_API_URL } from '../../../config.js';
+import { fetchSymbolValue } from '../../services/apiservice';
 
 interface WatchList {
     symbol: string;
     price: number
+}
+
+interface FetchError extends Error {
+    status?: number;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    errorData?: any;
 }
 
 function WatchListComponent() {
@@ -2557,7 +2563,7 @@ function WatchListComponent() {
     //const [showSearch, setShowSearch] = useState(false);
     const [searchText, setSearchText] = useState('');
     const [suggestions, setSuggestions] = useState<string[]>([]);
-    const [error, setError] = useState<string>('');
+    const [error, setError] = useState<FetchError>();
 
 
     const addWatchlist = (symbol: string, value: number) => {
@@ -2565,7 +2571,9 @@ function WatchListComponent() {
             symbol: symbol,
             price: value
         };
-        setWatchList([...watchlist, newWatchlist]);
+        const updatedWatchlist = [...watchlist, newWatchlist];
+        localStorage.setItem('watchlist', JSON.stringify(updatedWatchlist));
+        setWatchList(updatedWatchlist);
         setSearchText('');
         setSuggestions([]);
     };
@@ -2595,31 +2603,17 @@ function WatchListComponent() {
 
         const coin: string | undefined = coins.find(x => x === symbol);
         if (coin != undefined || coin != '') {
-            const data = await fetchSymbolValue(coin);
-            if (data.length > 0) {
-                const symbolLatestPrice: WatchList = data[0];
-                addWatchlist(symbolLatestPrice.symbol, symbolLatestPrice.price);
-            }
-        }
-    };
-    // Function to fetch symbol value from API
-    const fetchSymbolValue = async (symbol: string | undefined) => {
-        try {
-            const response = await fetch(`${REACT_APP_API_URL}/get-latest-price-by-symbol?symbol=${symbol}`, {
-                headers: {
-                    'X-Api-Key': REACT_APP_API_KEY
+            const { data, error } = await fetchSymbolValue(coin);
+            if (error) {
+                setError(error);
+                // Optionally, use SweetAlert to display the error
+                //swal("Error", error, "error");
+            } else {
+                if (data && data.length > 0) {
+                    const symbolLatestPrice: WatchList = data[0];
+                    addWatchlist(symbolLatestPrice.symbol, symbolLatestPrice.price);
                 }
-            });
-
-            if (!response.ok) {
-                setError(`Failed to fetch symbol value. Response Status-${response.status}, and Response Text-${response.statusText}`);
             }
-
-            const data = await response.json();
-            return data;
-        } catch (error) {
-            setError(`Failed to fetch symbol value. Error: ${error}`);
-            return null;
         }
     };
 
@@ -2628,11 +2622,12 @@ function WatchListComponent() {
         <div>
             {error && (
                 <div className="alert alert-danger" role="alert">
-                    {error}
+                    {error.message}
                 </div>
             )}
             <h2>Crypto</h2>
             <div className="crypto-search">
+                <label htmlFor="searchInput">Search Symbol:</label>
                 <input
                     type="text"
                     value={searchText}
